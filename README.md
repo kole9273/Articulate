@@ -23,13 +23,13 @@ Supporting all the features you'd want in a blogging platform
 * Customizable urls 
 * Author profiles
 
-## [Documentation](https://github.com/Shandem/Articulate/wiki)
+## [Documentation](https://github.com/Shazwazza/Articulate/wiki)
 
 Docs on installation, creating posts, customizing/creating themes, etc...
 
-## [Discussions](http://our.umbraco.org/projects/starter-kits/articulate/discussions)
+## [Discussions](https://our.umbraco.org/projects/starter-kits/articulate/discussions)
 
-Please post to this Umbraco discussions forum to discuss Articulate, it's features and functionality. Do not post issues here, post them [here](https://github.com/Shandem/Articulate/issues) on GitHub
+Please post to this Umbraco discussions forum to discuss Articulate, it's features and functionality. Do not post issues here, post them [here](https://github.com/Shazwazza/Articulate/issues) on GitHub
 
 ## [Issues](https://github.com/Shandem/Articulate/issues)
 
@@ -37,6 +37,6 @@ If you have any issues, please post them here on GitHub
 
 ## Copyright & Licence
 
-&copy; 2014 by Shannon Deminick
+&copy; 2016 by Shannon Deminick
 
 This is free software and is licensed under the [The MIT License (MIT)](http://opensource.org/licenses/MIT)

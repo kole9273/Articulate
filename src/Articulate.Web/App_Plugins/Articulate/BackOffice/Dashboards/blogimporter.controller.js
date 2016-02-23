@@ -1,4 +1,4 @@
-﻿angular.module("umbraco").controller("Articulate.Dashboard.BlogImporter",
+angular.module("umbraco").controller("Articulate.Dashboard.BlogImporter",
     function ($scope, umbRequestHelper, formHelper, fileManager, $http, $q) {
 
         //initialize the import, this will upload the file and return the post count
@@ -26,7 +26,7 @@
             return umbRequestHelper.resourcePromise(
                 $http.post(
                     Umbraco.Sys.ServerVariables["articulate"]["articulateImportBaseUrl"] + "PostImportBlogMl", {
-                        articulateNode: $scope.articulateNodeId,
+                        articulateNode: $scope.contentPickerModel.value,
                         overwrite: $scope.overwrite,
                         regexMatch: $scope.regexMatch,
                         regexReplace: $scope.regexReplace,
@@ -37,15 +37,53 @@
                 'Failed to import blog posts');
         }
 
+        function postExport() {
+            return umbRequestHelper.resourcePromise(
+                $http.post(
+                    Umbraco.Sys.ServerVariables["articulate"]["articulateImportBaseUrl"] + "PostExportBlogMl", {
+                        articulateNode: $scope.contentPickerModel.value
+                    }),
+                'Failed to export blog posts');
+        }
+
         var file = null;
 
+        $scope.dataAction = "i";
+
         $scope.submitting = false;
+
+        $scope.contentPickerModel = {
+            view: "contentpicker",
+            config: {
+                minNumber: 1
+            }
+        };
 
         $scope.$on("filesSelected", function (e, args) {
             file = args.files[0];
         });
 
-        $scope.submit = function () {
+        $scope.submitExport = function () {
+
+            if (formHelper.submitForm({ scope: $scope })) {
+
+                formHelper.resetForm({ scope: $scope });
+
+                $scope.submitting = true;
+                $scope.status = "Please wait...";
+
+                postExport()
+                    .then(function (data) {
+
+                        $scope.downloadLink = data;
+
+                        $scope.status = "Finished!";
+                        $scope.submitting = false;
+                    });
+            }
+        }
+
+        $scope.submitImport = function () {
 
             if (formHelper.submitForm({ scope: $scope })) {
 
@@ -56,10 +94,13 @@
 
                 postInitialize()
                     .then(postImport)
-                    .then(function(data) {
+                    .then(function (data) {
+
+                        $scope.downloadLink = data;
+
                         $scope.status = "Finished!";
                         $scope.submitting = false;
-                });
+                    });
             }
         }
     }).directive('requiredFile', function () {
